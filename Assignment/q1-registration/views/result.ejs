@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Registration Result</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
+        }
+
+        h1 {
+            text-align: center;
+            color: green;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .other-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin: 5px;
+            border-radius: 8px;
+        }
+
+        .image-box {
+            display: inline-block;
+            text-align: center;
+            margin: 10px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 5px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back {
+            margin-top: 25px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        Registration Successful
+    </h1>
+
+
+    <table>
+
+        <tr>
+
+            <th>
+                Field
+            </th>
+
+            <th>
+                Details
+            </th>
+
+        </tr>
+
+
+        <!-- USERNAME -->
+
+        <tr>
+
+            <td>
+                Username
+            </td>
+
+            <td>
+                <%= data.username %>
+            </td>
+
+        </tr>
+
+
+        <!-- EMAIL -->
+
+        <tr>
+
+            <td>
+                Email
+            </td>
+
+            <td>
+                <%= data.email %>
+            </td>
+
+        </tr>
+
+
+        <!-- GENDER -->
+
+        <tr>
+
+            <td>
+                Gender
+            </td>
+
+            <td>
+                <%= data.gender %>
+            </td>
+
+        </tr>
+
+
+        <!-- HOBBIES -->
+
+        <tr>
+
+            <td>
+                Hobbies
+            </td>
+
+            <td>
+
+                <% if (data.hobbies.length > 0) { %>
+
+                    <%= data.hobbies.join(", ") %>
+
+                <% } else { %>
+
+                    No hobbies selected
+
+                <% } %>
+
+            </td>
+
+        </tr>
+
+
+        <!-- PROFILE PICTURE -->
+
+        <tr>
+
+            <td>
+                Profile Picture
+            </td>
+
+            <td>
+
+                <img
+                    class="profile-image"
+                    src="/uploads/<%= data.profilePic.filename %>"
+                    alt="Profile Picture"
+                >
+
+                <br>
+
+                <strong>
+                    Original File:
+                </strong>
+
+                <%= data.profilePic.originalname %>
+
+                <br>
+
+                <a
+                    href="/download/<%= data.profilePic.filename %>"
+                >
+                    Download Profile Picture
+                </a>
+
+            </td>
+
+        </tr>
+
+
+        <!-- OTHER PICTURES -->
+
+        <tr>
+
+            <td>
+                Other Pictures
+            </td>
+
+            <td>
+
+                <% if (data.otherPics.length === 0) { %>
+
+                    No other pictures uploaded.
+
+                <% } %>
+
+
+                <% data.otherPics.forEach(function(file) { %>
+
+                    <div class="image-box">
+
+                        <img
+                            class="other-image"
+                            src="/uploads/<%= file.filename %>"
+                            alt="Other Picture"
+                        >
+
+                        <br>
+
+                        <%= file.originalname %>
+
+                        <br>
+
+                        <a
+                            href="/download/<%= file.filename %>"
+                        >
+                            Download
+                        </a>
+
+                    </div>
+
+                <% }); %>
+
+            </td>
+
+        </tr>
+
+
+    </table>
+
+
+    <a
+        href="/"
+        class="back"
+    >
+        Back to Registration
+    </a>
+
+</div>
+
+</body>
+
+</html>

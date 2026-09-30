@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>User Registration</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            margin-top: 8px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 8px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            font-weight: normal;
+            margin-right: 15px;
+        }
+
+        .errors {
+            background: #ffe5e5;
+            color: #c00;
+            padding: 15px;
+            border: 1px solid red;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .errors li {
+            margin-bottom: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: #666;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>User Registration</h1>
+
+
+    <!-- ============================================
+         DISPLAY ERRORS
+         ============================================ -->
+
+    <% if (errors && errors.length > 0) { %>
+
+        <div class="errors">
+
+            <strong>Please correct the following errors:</strong>
+
+            <ul>
+
+                <% errors.forEach(function(error) { %>
+
+                    <li>
+                        <%= error.msg %>
+                    </li>
+
+                <% }); %>
+
+            </ul>
+
+        </div>
+
+    <% } %>
+
+
+    <!-- ============================================
+         REGISTRATION FORM
+         ============================================ -->
+
+    <form
+        action="/register"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+
+
+        <!-- USERNAME -->
+
+        <div class="form-group">
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                value="<%= values.username || '' %>"
+                placeholder="Enter username"
+            >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+            >
+
+            <div class="hint">
+                Minimum 6 characters
+            </div>
+
+        </div>
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="form-group">
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm password"
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                value="<%= values.email || '' %>"
+                placeholder="Enter email"
+            >
+
+        </div>
+
+
+        <!-- GENDER -->
+
+        <div class="form-group">
+
+            <label>
+                Gender
+            </label>
+
+            <div class="radio-group">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Male"
+
+                        <%= values.gender === "Male"
+                            ? "checked"
+                            : "" %>
+                    >
+
+                    Male
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Female"
+
+                        <%= values.gender === "Female"
+                            ? "checked"
+                            : "" %>
+                    >
+
+                    Female
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Other"
+
+                        <%= values.gender === "Other"
+                            ? "checked"
+                            : "" %>
+                    >
+
+                    Other
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- HOBBIES -->
+
+        <div class="form-group">
+
+            <label>
+                Hobbies
+            </label>
+
+            <div class="checkbox-group">
+
+
+                <%
+                    const selectedHobbies =
+                        Array.isArray(values.hobbies)
+                            ? values.hobbies
+                            : values.hobbies
+                                ? [values.hobbies]
+                                : [];
+                %>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="hobbies"
+                        value="Reading"
+
+                        <%= selectedHobbies.includes("Reading")
+                            ? "checked"
+                            : "" %>
+                    >
+
+                    Reading
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="hobbies"
+                        value="Sports"
+
+                        <%= selectedHobbies.includes("Sports")
+                            ? "checked"
+                            : "" %>
+                    >
+
+                    Sports
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="hobbies"
+                        value="Music"
+
+                        <%= selectedHobbies.includes("Music")
+                            ? "checked"
+                            : "" %>
+                    >
+
+                    Music
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="hobbies"
+                        value="Coding"
+
+                        <%= selectedHobbies.includes("Coding")
+                            ? "checked"
+                            : "" %>
+                    >
+
+                    Coding
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE PICTURE -->
+
+        <div class="form-group">
+
+            <label>
+                Profile Picture
+            </label>
+
+            <br>
+
+            <input
+                type="file"
+                name="profilePic"
+                accept="image/*"
+            >
+
+            <div class="hint">
+                Single image only. Maximum 2 MB.
+            </div>
+
+        </div>
+
+
+        <!-- OTHER PICTURES -->
+
+        <div class="form-group">
+
+            <label>
+                Other Pictures
+            </label>
+
+            <br>
+
+            <input
+                type="file"
+                name="otherPics"
+                accept="image/*"
+                multiple
+            >
+
+            <div class="hint">
+                You can select multiple images.
+                Maximum 5 files, 2 MB each.
+            </div>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <button type="submit">
+            Register
+        </button>
+
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

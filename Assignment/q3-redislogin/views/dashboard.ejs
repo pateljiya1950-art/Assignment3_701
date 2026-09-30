@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dashboard</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        .navbar {
+            background: #222;
+            padding: 15px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+        }
+
+        .container {
+            width: 700px;
+
+            margin: 50px auto;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 10px;
+
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        .card {
+            background: #f5f5f5;
+
+            padding: 20px;
+
+            margin-top: 20px;
+
+            border-radius: 5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <a href="/dashboard">
+        Dashboard
+    </a>
+
+    <a href="/profile">
+        Profile
+    </a>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</div>
+
+<div class="container">
+
+    <h1>Dashboard</h1>
+
+    <h2>
+        Welcome, <%= user.username %>!
+    </h2>
+
+    <div class="card">
+
+        <p>
+            You have successfully logged in.
+        </p>
+
+        <p>
+            This is the first protected route.
+        </p>
+
+        <p>
+            Your session is stored in Redis.
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

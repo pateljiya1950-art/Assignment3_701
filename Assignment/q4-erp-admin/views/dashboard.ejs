@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ERP Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="brand">
+            ERP ADMIN PANEL
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/employees">
+                Employees
+            </a>
+
+            <a href="/employees/add">
+                Add Employee
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="card">
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+            <h3>
+                Welcome,
+                <%= admin.username %>
+            </h3>
+
+            <hr>
+
+            <p>
+                Total Employees
+            </p>
+
+            <div class="count">
+                <%= employeeCount %>
+            </div>
+
+            <a
+                href="/employees"
+                class="btn"
+            >
+                Manage Employees
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
